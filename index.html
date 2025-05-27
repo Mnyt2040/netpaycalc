@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <link rel="stylesheet" href="net.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Employee Salary Calculator</h1>
+            <div class="theme-toggle">
+                <button id="themeBtn">🌙 Dark Mode</button>
+            </div>
+        </header>
+
+        <form id="salaryForm">
+            <div class="form-section">
+                <h2>Employee Details</h2>
+                <div class="form-group">
+                    <label for="employeeName">Full Name:</label>
+                    <input type="text" id="employeeName" name="employeeName" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeId">Employee ID:</label>
+                    <input type="text" id="employeeId" name="employeeId" required>
+                    <div class="error-message" id="idError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeDepartment">Department:</label>
+                    <input type="text" id="employeeDepartment" name="employeeDepartment" required>
+                    <div class="error-message" id="deptError"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Salary Information</h2>
+                <div class="form-group">
+                    <label for="salaryPeriod">Salary Period:</label>
+                    <select id="salaryPeriod" name="salaryPeriod">
+                        <option value="monthly">Monthly</option>
+                        <option value="annual">Annual</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="grossSalary">Gross Salary (UGX):</label>
+                    <input type="number" id="grossSalary" name="grossSalary" min="0" required>
+                    <div class="error-message" id="salaryError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>NSSF Tier:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="tier1" name="nssfTier" value="tier1" checked>
+                        <label for="tier1">Tier I (5% employee, 10% employer)</label>
+                        
+                        <input type="radio" id="tier2" name="nssfTier" value="tier2">
+                        <label for="tier2">Tier II (10% employee, 10% employer)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Allowances</h2>
+                <div class="allowances">
+                    <div class="allowance-item">
+                        <label for="housing">Housing:</label>
+                        <input type="number" id="housing" min="0" value="0">
+                    </div>
+                    <div class="allowance-item">
+                        <label for="transport">Transport:</label>
+                        <input type="number" id="transport" min="0" value="0">
+                    </div>
+                    <div class="allowance-item">
+                        <label for="medical">Medical:</label>
+                        <input type="number" id="medical" min="0" value="0">
+                    </div>
+                    <div class="allowance-item">
+                        <label for="other">Other:</label>
+                        <input type="number" id="other" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Deductions</h2>
+                <div class="deductions">
+                    <div class="deduction-item">
+                        <label for="loan">Loan:</label>
+                        <input type="number" id="loan" min="0" value="0">
+                    </div>
+                    <div class="deduction-item">
+                        <label for="savings">Savings:</label>
+                        <input type="number" id="savings" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" id="calculateBtn">Calculate Salary</button>
+                <button type="button" id="resetBtn">Reset Form</button>
+            </div>
+        </form>
+
+        <div class="results" id="results">
+            <h2>Salary Breakdown for <span id="resultName"></span></h2>
+            <div class="result-grid">
+                <div class="result-item">
+                    <span>Gross Salary:</span>
+                    <span id="grossResult">UGX 0</span>
+                </div>
+                <div class="result-item">
+                    <span>Total Allowances:</span>
+                    <span id="allowancesResult">UGX 0</span>
+                </div>
+                <div class="result-item highlight">
+                    <span>Taxable Income:</span>
+                    <span id="taxableIncomeResult">UGX 0</span>
+                </div>
+                <div class="result-item">
+                    <span>PAYE Tax:</span>
+                    <span id="payeResult">UGX 0</span>
+                </div>
+                <div class="result-item">
+                    <span>Employee NSSF:</span>
+                    <span id="nssfEmployeeResult">UGX 0</span>
+                </div>
+                <div class="result-item">
+                    <span>Other Deductions:</span>
+                    <span id="deductionsResult">UGX 0</span>
+                </div>
+                <div class="result-item total">
+                    <span>Total Deductions:</span>
+                    <span id="totalDeductions">UGX 0</span>
+                </div>
+                <div class="result-item net-pay">
+                    <span>Net Pay:</span>
+                    <span id="netPayResult">UGX 0</span>
+                </div>
+            </div>
+            <button type="button" id="exportBtn" class="export-btn">Export Salary Slip</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
